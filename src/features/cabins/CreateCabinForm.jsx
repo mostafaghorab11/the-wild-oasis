@@ -9,7 +9,8 @@ import Textarea from '../../ui/Textarea';
 import { useCreateCabin } from './useCreateCabin';
 import { useEditCabin } from './useEditCabin';
 
-function CreateCabinForm({ cabinToEdit = {} }) {
+function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
+
   const { id: editId, ...editCabinData } = cabinToEdit;
   const isEdit = Boolean(editId);
 
@@ -37,6 +38,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           {
             onSuccess: () => {
               reset();
+              onCloseModal?.();
             },
           }
         )
@@ -45,13 +47,14 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           {
             onSuccess: () => {
               reset();
+              onCloseModal?.();
             },
           }
         );
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form type={onCloseModal ? 'modal' : 'regular'} onSubmit={handleSubmit(onSubmit)}>
       <FormRow label="Cabin name" error={errors.name?.message}>
         <Input
           disabled={isLoading}
@@ -133,7 +136,11 @@ function CreateCabinForm({ cabinToEdit = {} }) {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset">
+        <Button
+          variation="secondary"
+          type="reset"
+          onClick={() => onCloseModal?.()}
+        >
           Cancel
         </Button>
         <Button disabled={isLoading}>

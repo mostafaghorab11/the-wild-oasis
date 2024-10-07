@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useCabins } from '../features/cabins/useCabins';
 import Logo from './Logo';
 import MainNav from './MainNav';
 
@@ -14,6 +15,7 @@ const StyledSideBar = styled.aside`
 `;
 
 function SideBar() {
+  useCabins();
   return (
     <StyledSideBar>
       <Logo />

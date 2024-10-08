@@ -6,21 +6,24 @@ export function useBookings() {
   const [searchParams] = useSearchParams();
   const filterName = searchParams.get('status') || 'all';
 
+  // FILTER
   const filter =
     filterName === 'all'
       ? null
       : { field: 'status', method: 'eq', value: filterName };
 
+  // SORT
   const sortByRaw = searchParams.get('sortBy') || 'startDate-desc';
-
   const [field, direction] = sortByRaw.split('-');
-
   const sortBy = { field, direction };
 
-  const { isPending, data: bookings } = useQuery({
-    queryKey: ['bookings', filter, sortBy],
-    queryFn: () => getBookings(filter, sortBy),
+  // PAGINATION
+  const page = !searchParams.get('page') ? 1 : Number(searchParams.get('page'));
+
+  const { isPending, data: { data: bookings, count } = {} } = useQuery({
+    queryKey: ['bookings', filter, sortBy, page],
+    queryFn: () => getBookings(filter, sortBy, page),
   });
 
-  return { isPending, bookings };
+  return { isPending, bookings, count };
 }

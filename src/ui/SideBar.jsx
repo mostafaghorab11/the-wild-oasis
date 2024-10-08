@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Uploader from '../data/Uploader';
+import { useBookings } from '../features/bookings/useBookings';
 import { useCabins } from '../features/cabins/useCabins';
 import Logo from './Logo';
 import MainNav from './MainNav';

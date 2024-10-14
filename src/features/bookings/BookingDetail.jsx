@@ -13,6 +13,7 @@ import Tag from '../../ui/Tag';
 import BookingDataBox from './BookingDataBox';
 
 import { useMoveBack } from '../../hooks/useMoveBack';
+import Empty from '../../ui/Empty';
 import { useCheckout } from '../check-in-out/useCheckout';
 import { useBooking } from './useBooking';
 import { useDeleteBooking } from './useDeleteBooking';
@@ -32,6 +33,7 @@ function BookingDetail() {
   const { deleteBooking, isDeleting } = useDeleteBooking();
 
   if (isPending) return <Spinner />;
+  if (!booking) return <Empty resourceName="booking" />;
 
   const { status, id: bookingId } = booking;
 

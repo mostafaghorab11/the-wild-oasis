@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useUser } from '../features/authentication/useUser';
+import Empty from './Empty';
 import Spinner from './Spinner';
 
 const FullPage = styled.div`
@@ -18,12 +18,12 @@ function ProtectedRoute({ children }) {
 
   console.log(isAuthenticated);
 
-  useEffect(
-    function () {
-      if (!isAuthenticated && !isPending) navigate('/login');
-    },
-    [isAuthenticated, isPending, navigate]
-  );
+  // useEffect(
+  //   function () {
+  //     if (!isAuthenticated && !isPending) navigate('/login');
+  //   },
+  //   [isAuthenticated, isPending, navigate]
+  // );
 
   if (isPending)
     return (
@@ -32,7 +32,9 @@ function ProtectedRoute({ children }) {
       </FullPage>
     );
 
-  if (isAuthenticated) return children;
+  if (isAuthenticated) {
+    return children;
+  }
 }
 
 export default ProtectedRoute;

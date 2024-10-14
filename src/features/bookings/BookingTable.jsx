@@ -1,10 +1,10 @@
 import Empty from '../../ui/Empty';
 import Menus from '../../ui/Menus';
+import Pagination from '../../ui/Pagination';
 import Spinner from '../../ui/Spinner';
 import Table from '../../ui/Table';
 import BookingRow from './BookingRow';
 import { useBookings } from './useBookings';
-import Pagination from '../../ui/Pagination';
 
 function BookingTable() {
   const { isPending, bookings, count } = useBookings();

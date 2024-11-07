@@ -1,7 +1,6 @@
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useUser } from '../features/authentication/useUser';
-import Empty from './Empty';
 import Spinner from './Spinner';
 
 const FullPage = styled.div`
@@ -13,7 +12,7 @@ const FullPage = styled.div`
 `;
 
 function ProtectedRoute({ children }) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { isPending, isAuthenticated } = useUser();
 
   console.log(isAuthenticated);
